@@ -71,6 +71,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
 
     private static ArrayList<String> chatUserNotifs;  //userIds who have unseen messages
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
