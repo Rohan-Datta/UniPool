@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -44,7 +45,10 @@ import static garbagecollectors.com.unipool.activities.SplashActivity.MessageDBT
 
 public abstract class BaseActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener
 {
-    public static Integer G = 13, P = 2647;
+    public static BigInteger G = BigInteger.valueOf(13);
+    public static BigInteger P = BigInteger.valueOf(2647);
+
+    public static BigInteger B;                                 //B = Received Key
 
     protected BottomNavigationView bottomNavigationView;
 	protected NavigationView navigationView;
@@ -360,11 +364,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
         Picasso.get().load(finalCurrentUser.getPhotoUrl()).into(userImageOnHeader);
 	}
 
-    public static Integer getG() {
+    public static BigInteger getG() {
         return G;
     }
 
-    public static Integer getP() {
+    public static BigInteger getP() {
         return P;
     }
 

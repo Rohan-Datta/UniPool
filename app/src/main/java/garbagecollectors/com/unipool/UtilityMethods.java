@@ -13,6 +13,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -505,14 +507,29 @@ public class UtilityMethods
         return sb.toString();
     }
 
-    public static Double generateKey(Integer receivedKey)              //receivedKey = B
+    public static BigInteger generateKey(BigInteger receivedKey)              //receivedKey = B
     {
-        Integer secretNumber = new Random().nextInt(4) + 2;       //secretNumber = a
+        Integer secretNumber = new Random().nextInt(100) + 2;       //secretNumber = a
 
-        Double sentKey = (Math.pow(BaseActivity.getG(),secretNumber))%(BaseActivity.getP());   //sentKey = A
+        System.out.println("Secret Number = a =  "+secretNumber);
 
-        Double key = (Math.pow(receivedKey, secretNumber))%(BaseActivity.getP());               //Key = K
+        System.out.println("G =  "+BaseActivity.getG());
 
+        System.out.println("P =  "+BaseActivity.getP());
+
+        System.out.println("B =  "+receivedKey);
+
+        System.out.println("G^a =  "+(BaseActivity.getG().pow(secretNumber)));
+
+        BigInteger sentKey = (BaseActivity.getG().pow(secretNumber)).mod(BaseActivity.getP());   //sentKey = A = (g^a)%p
+
+        System.out.println("Sent Key = A = "+sentKey);
+
+        BigInteger firstTerm = receivedKey.pow(secretNumber);
+
+        System.out.println("First Term = "+firstTerm.toString());
+
+        BigInteger key = (receivedKey.pow(secretNumber)).mod(BaseActivity.getP());               //Key = K = (B^a)%p
         return key;
     }
 }
